@@ -66,7 +66,7 @@ const FeedPage = () => {
                 onClick={() => handleFollow(post.id)}
                 className={`px-4 py-2 text-sm font-medium rounded-full ${
                   post.isFollowing
-                    ? 'bg-green-500 text-white'
+                    ? 'bg-[#00a36c] text-white'
                     : 'bg-gray-200 text-gray-800'
                 }`}
               >

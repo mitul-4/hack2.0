@@ -20,8 +20,6 @@ const Home = () => {
   const saveConsiderations = () => {
     console.log('Considerations saved:', { effort, sentiment });
   };
-  
-  const [AIResponse, setAIResponse] = useState<string>('');
 
 
   const addIngredient = () => {
@@ -69,10 +67,7 @@ const Home = () => {
         saveConsiderations={saveConsiderations}
       />
 
-      <AISubmit 
-        AIResponse={AIResponse}
-        callAI={callAI}
-      />
+      <AISubmit />
     </div>
   );
 };

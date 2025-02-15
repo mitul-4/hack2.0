@@ -1,48 +1,46 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image"; // ✅ Import Next.js Image
-import { UserCircle, Bookmark, Bell, Shield, List, Utensils } from "lucide-react";
+import { UserCircle, Bookmark, List, Utensils } from "lucide-react";
 import ProfileInfo from "../../components/ProfileInfo";
 import DietaryPreferences from "../../components/ProfilePreferences";
 import CookingHistory from "../../components/FavouritedRecipes";
-import PrivacySettings from "../../components/privacy";
-import PushNotifications from "../../components/notifs";
 import ShoppingListReminders from "../../components/ShoppingReminders";
 
 const Profile = () => {
-  const [activeTab, setActiveTab] = useState("profile");
+  const [activeTab, setActiveTab] = useState("Profile");
+
+  const tabs = [
+    { name: "Profile", Icon: UserCircle, component: <ProfileInfo /> },
+    { name: "Diet", Icon: Utensils, component: <DietaryPreferences /> },
+    { name: "History", Icon: Bookmark, component: <CookingHistory /> },
+    { name: "Shopping List", Icon: List, component: <ShoppingListReminders /> },
+  ];
 
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
-      <nav className="w-64 bg-white shadow-lg p-6 space-y-4">
-        <button className={`flex items-center gap-2 p-2 rounded-lg w-full ${activeTab === "profile" ? "bg-blue-500 text-white" : "text-gray-700"}`} onClick={() => setActiveTab("profile")}>
-          <UserCircle size={20} /> Profile  
-        </button>
-        <button className={`flex items-center gap-2 p-2 rounded-lg w-full ${activeTab === "diet" ? "bg-blue-500 text-white" : "text-gray-700"}`} onClick={() => setActiveTab("diet")}>
-          <Utensils size={20} /> Dietary Preferences
-        </button>
-        <button className={`flex items-center gap-2 p-2 rounded-lg w-full ${activeTab === "history" ? "bg-blue-500 text-white" : "text-gray-700"}`} onClick={() => setActiveTab("history")}>
-          <Bookmark size={20} /> Favourited Recipes
-        </button>
-        <button className={`flex items-center gap-2 p-2 rounded-lg w-full ${activeTab === "privacy" ? "bg-blue-500 text-white" : "text-gray-700"}`} onClick={() => setActiveTab("privacy")}>
-          <Shield size={20} /> Privacy Settings
-        </button>
-        <button className={`flex items-center gap-2 p-2 rounded-lg w-full ${activeTab === "notifications" ? "bg-blue-500 text-white" : "text-gray-700"}`} onClick={() => setActiveTab("notifications")}>
-          <Bell size={20} /> Push Notifications
-        </button>
-        <button className={`flex items-center gap-2 p-2 rounded-lg w-full ${activeTab === "reminders" ? "bg-blue-500 text-white" : "text-gray-700"}`} onClick={() => setActiveTab("reminders")}>
-          <List size={20} /> Shopping List
-        </button>
+      <nav className="w-64 bg-white shadow-lg p-2 space-y-4">
+        {tabs.map((tab) => (
+          <button
+            key={tab.name}
+            className={`flex items-center gap-2 p-2 rounded-lg w-full ${activeTab === tab.name ? "bg-[#00a36c] text-white" : "text-gray-700"}`}
+            onClick={() => setActiveTab(tab.name)}
+          >
+            <tab.Icon size={20} /> {tab.name}
+          </button>
+        ))}
       </nav>
 
       {/* Main Content */}
       <div className="flex-1 p-8">
-        {activeTab === "diet" && <DietaryPreferences />}
-        {activeTab === "history" && <CookingHistory />}
-        {activeTab === "privacy" && <PrivacySettings />}
-        {activeTab === "notifications" && <PushNotifications />}
-        {activeTab === "reminders" && <ShoppingListReminders />}
+        {tabs.map(
+          (tab) =>
+            activeTab === tab.name && (
+              <div key={tab.name}>
+                {tab.component}
+              </div>
+            )
+        )}
       </div>
     </div>
   );
