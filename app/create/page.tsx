@@ -4,6 +4,16 @@ import IngredientsList from '../../components/IngredientsList';
 import DietaryPreferences from '../../components/DietaryPreferences';
 import AISubmit from '@/components/AISubmit';
 import OtherConsiderations from '@/components/OtherConsiderations';
+import {
+  StepsCompletedContent,
+  StepsContent,
+  StepsItem,
+  StepsList,
+  StepsNextTrigger,
+  StepsPrevTrigger,
+  StepsRoot,
+} from "@/components/ui/steps"
+import { Button, For, Group, Stack } from "@chakra-ui/react"
 
 const Home = () => {
   const [ingredients, setIngredients] = useState<{ name: string, quantity: string, unit: string }[]>([]);
@@ -38,6 +48,36 @@ const Home = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
+      <StepsRoot>
+        <StepsList>
+          <StepsItem index={0} title="Add Ingredients" />
+          <StepsItem index={1} title="Dietary Preferences" />
+          <StepsItem index={2} title="Other Considerations" />
+          <StepsItem index={3} title="Create Meal Plan!" />
+        </StepsList>
+
+        <StepsContent index={0}>Step 1</StepsContent>
+        <StepsContent index={1}>Step 2</StepsContent>
+        <StepsContent index={2}>Step 3</StepsContent>
+        <StepsCompletedContent>
+          All steps are complete!
+        </StepsCompletedContent>
+
+        <Group>
+          <StepsPrevTrigger asChild>
+            <Button variant="outline" size="sm">
+              Prev
+            </Button>
+          </StepsPrevTrigger>
+          <StepsNextTrigger asChild>
+            <Button variant="outline" size="sm">
+              Next
+            </Button>
+          </StepsNextTrigger>
+        </Group>
+      </StepsRoot>
+
+
       <IngredientsList
         ingredientName={ingredientName}
         setIngredientName={setIngredientName}
