@@ -20,13 +20,13 @@ const OtherConsiderations: React.FC<OtherConsiderationsProps> = ({
         <textarea
           value={effort}
           onChange={(e) => setEffort(e.target.value)}
-          placeholder="Allergies (e.g., nuts, dairy)"
+          placeholder="How much effort are you willing to put in?"
           className="w-full p-2 border rounded-md mb-2"
         />
         <textarea
           value={sentiment}
           onChange={(e) => setSentiment(e.target.value)}
-          placeholder="Health Goals (e.g., weight loss, muscle gain)"
+          placeholder="Feeling (e.g. I'm feeling sunny!)"
           className="w-full p-2 border rounded-md mb-2"
         />
         <button
