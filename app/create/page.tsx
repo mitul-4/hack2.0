@@ -32,8 +32,7 @@ const Home = () => {
   };
   
   const [AIResponse, setAIResponse] = useState<string>('');
-  const callAI = () => {
-  };
+  
 
   const addIngredient = () => {
     setIngredients([...ingredients, { name: ingredientName, quantity: ingredientQuantity, unit: ingredientUnit }]);
@@ -44,6 +43,26 @@ const Home = () => {
 
   const savePreferences = () => {
     console.log('Preferences saved:', { allergies, healthGoals, dislikedIngredients });
+  };
+
+  const callAI = async () => {
+    const prompt = `Ingredients: ${ingredients.map(i => `${i.quantity} ${i.unit} ${i.name}`).join(', ')}
+      Allergies: ${allergies}
+      Health Goals: ${healthGoals}
+      Dislikes: ${dislikedIngredients}
+      Effort Level: ${effort}
+      Mood: ${sentiment}`;
+      
+    try {
+      const response = await fetch('/api/meal-planning', {
+        method: 'POST',
+        body: JSON.stringify({ prompt }),
+      });
+      const data = await response.json();
+      setAIResponse(data.response);
+    } catch (error) {
+      setAIResponse('Error generating recipe. Please try again.');
+    }
   };
 
   return (
