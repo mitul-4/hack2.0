@@ -3,7 +3,7 @@ import { useState } from 'react';
 import IngredientsList from '../../components/IngredientsList';
 import DietaryPreferences from '../../components/DietaryPreferences';
 import AISubmit from '@/components/AISubmit';
-
+import OtherConsiderations from '@/components/OtherConsiderations';
 
 const Home = () => {
   const [ingredients, setIngredients] = useState<{ name: string, quantity: string, unit: string }[]>([]);
@@ -15,7 +15,15 @@ const Home = () => {
   const [healthGoals, setHealthGoals] = useState<string>('');
   const [dislikedIngredients, setDislikedIngredients] = useState<string>('');
 
+  const [effort, setEffort] = useState<string>('');
+  const [sentiment, setSentiment] = useState<string>('');
+  const saveConsiderations = () => {
+    console.log('Considerations saved:', { effort, sentiment });
+  };
+  
   const [AIResponse, setAIResponse] = useState<string>('');
+  const callAI = () => {
+  };
 
   const addIngredient = () => {
     setIngredients([...ingredients, { name: ingredientName, quantity: ingredientQuantity, unit: ingredientUnit }]);
@@ -49,7 +57,17 @@ const Home = () => {
         setDislikedIngredients={setDislikedIngredients}
         savePreferences={savePreferences}
       />
-      <AISubmit AIResponse={AIResponse}/>
+      <OtherConsiderations
+        effort={effort}
+        setEffort={setEffort}
+        sentiment={sentiment}
+        setSentiment={setSentiment}
+        saveConsiderations={saveConsiderations}
+      />
+      <AISubmit 
+        AIResponse={AIResponse}
+        callAI={callAI}
+      />
     </div>
   );
 };
