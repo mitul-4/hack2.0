@@ -22,8 +22,8 @@ const DietaryPreferences = () => {
 
       {/* Update Preferences Button */}
       <div className="mt-6 text-center">
-        <button className="px-6 py-2 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition duration-200">
-          Update Preferences
+      <button className="px-6 py-2 bg-[#00a36c] text-white rounded-lg font-semibold hover:bg-[#007f4c] transition duration-200">
+        Update Preferences
         </button>
       </div>
     </div>

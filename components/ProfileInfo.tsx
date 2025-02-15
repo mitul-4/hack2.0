@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -55,16 +55,20 @@ const Profile = () => {
       {/* Tab Navigation (Posts & Saved) */}
       <div className="mt-6 flex border-b">
         <button
-          className={`flex-1 py-2 text-center font-bold ${
-            activeTab === "posts" ? "border-b-2 border-blue-500 text-blue-500" : "text-gray-600"
+          className={`flex-1 py-2 text-center font-bold transition-all duration-300 ${
+            activeTab === "posts"
+              ? "border-b-2 border-[#00a36c] text-[#00a36c]"
+              : "text-gray-600 hover:text-[#00a36c]"
           }`}
           onClick={() => setActiveTab("posts")}
         >
           Posts
         </button>
         <button
-          className={`flex-1 py-2 text-center font-bold ${
-            activeTab === "saved" ? "border-b-2 border-blue-500 text-blue-500" : "text-gray-600"
+          className={`flex-1 py-2 text-center font-bold transition-all duration-300 ${
+            activeTab === "saved"
+              ? "border-b-2 border-[#00a36c] text-[#00a36c]"
+              : "text-gray-600 hover:text-[#00a36c]"
           }`}
           onClick={() => setActiveTab("saved")}
         >

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import RecipeToFeed from './RecipeToFeed';
-const [generatedRecipes, setGeneratedRecipes] = useState<Recipe[]>([]);
+
 interface Ingredient {
   name: string;
   volume: string;
@@ -34,7 +34,7 @@ interface AISubmitProps {
 const AISubmit: React.FC<AISubmitProps> = ({ ingredients, preferences, onResponse }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [generatedRecipes, setGeneratedRecipes] = useState<Recipe[]>([]);
+  const [generatedRecipes, setGeneratedRecipes] = useState<Recipe[]>([]); // ✅ Correct placement inside the component
 
   const callAI = async () => {
     try {
@@ -73,39 +73,35 @@ const AISubmit: React.FC<AISubmitProps> = ({ ingredients, preferences, onRespons
 
   return (
     <div>
-    <div className="w-full bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 mb-6">
-      <h2 className="text-2xl font-semibold mb-4">Step 4: Generate Meal Plan!</h2>
-      <button
-        onClick={callAI}
-        disabled={loading}
-        className="w-full max-w-md bg-[#00a36c] text-white py-2 rounded-full hover:bg-[#007f4c] disabled:bg-gray-400 disabled:cursor-not-allowed"
-      >
-        {loading ? 'Creating your meal plan...' : 'Create your meal'}
-      </button>
-      {error && (
-        <div className="mt-4 p-3 bg-red-100 text-red-700 rounded-md">
-          {error}
-        </div>
-      )}
-    </div>
-    <div>
-    
-    
-    {generatedRecipes.map((recipe, index) => (
-      <div key={index} className="mt-8">
-        <h3 className="text-xl font-semibold">{recipe.name}</h3>
-        {/* Display recipe details */}
-        <RecipeToFeed 
-          recipe={recipe}
-          onSuccess={() => {
-            // Handle successful post
-            alert('Recipe shared to feed!');
-          }}
-        />
+      <div className="w-full bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 mb-6">
+        <h2 className="text-2xl font-semibold mb-4">Step 4: Generate Meal Plan!</h2>
+        <button
+          onClick={callAI}
+          disabled={loading}
+          className="w-full max-w-md bg-[#00a36c] text-white py-2 rounded-full hover:bg-[#007f4c] disabled:bg-gray-400 disabled:cursor-not-allowed"
+        >
+          {loading ? 'Creating your meal plan...' : 'Create your meal'}
+        </button>
+        {error && (
+          <div className="mt-4 p-3 bg-red-100 text-red-700 rounded-md">
+            {error}
+          </div>
+        )}
       </div>
-    ))}
-  </div>
-  </div>
+      <div>
+        {generatedRecipes.map((recipe, index) => (
+          <div key={index} className="mt-8">
+            <h3 className="text-xl font-semibold">{recipe.name}</h3>
+            <RecipeToFeed 
+              recipe={recipe}
+              onSuccess={() => {
+                alert('Recipe shared to feed!');
+              }}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
