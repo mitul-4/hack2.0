@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-
+import RecipeToFeed from './RecipeToFeed';
+const [generatedRecipes, setGeneratedRecipes] = useState<Recipe[]>([]);
 interface Ingredient {
   name: string;
   volume: string;
@@ -33,6 +34,7 @@ interface AISubmitProps {
 const AISubmit: React.FC<AISubmitProps> = ({ ingredients, preferences, onResponse }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [generatedRecipes, setGeneratedRecipes] = useState<Recipe[]>([]);
 
   const callAI = async () => {
     try {
@@ -57,6 +59,7 @@ const AISubmit: React.FC<AISubmitProps> = ({ ingredients, preferences, onRespons
       }
 
       if (data.success && data.recipes) {
+        setGeneratedRecipes(data.recipes);
         onResponse(data.recipes);
       } else {
         throw new Error('Invalid response format');
@@ -69,6 +72,7 @@ const AISubmit: React.FC<AISubmitProps> = ({ ingredients, preferences, onRespons
   };
 
   return (
+    <div>
     <div className="w-full bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 mb-6">
       <h2 className="text-2xl font-semibold mb-4">Generate Meal Plan!</h2>
       <button
@@ -84,6 +88,24 @@ const AISubmit: React.FC<AISubmitProps> = ({ ingredients, preferences, onRespons
         </div>
       )}
     </div>
+    <div>
+    
+    
+    {generatedRecipes.map((recipe, index) => (
+      <div key={index} className="mt-8">
+        <h3 className="text-xl font-semibold">{recipe.name}</h3>
+        {/* Display recipe details */}
+        <RecipeToFeed 
+          recipe={recipe}
+          onSuccess={() => {
+            // Handle successful post
+            alert('Recipe shared to feed!');
+          }}
+        />
+      </div>
+    ))}
+  </div>
+  </div>
   );
 };
 
