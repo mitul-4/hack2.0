@@ -108,7 +108,7 @@ const FeedPage = () => {
               <img
                 src={post.imageUrl}
                 alt={post.recipeName}
-                className="rounded-lg w-full h-30 object-cover mt-2"
+                className="rounded-lg w-full h-96 object-cover mt-2"
               />
             </div>
 
