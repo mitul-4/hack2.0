@@ -22,8 +22,8 @@ const IngredientsList: React.FC<IngredientsListProps> = ({
   addIngredient,
 }) => {
   return (
-    <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-md mb-6">
-      <h2 className="text-2xl font-semibold mb-4">Your Ingredients:</h2>
+    <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 mb-6 mt-6">
+      <h2 className="text-2xl font-semibold mb-4">Step 1: Add Ingredients</h2>
       <div className="mb-4">
         <input
           type="text"

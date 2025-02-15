@@ -1,8 +1,8 @@
-// pages/index.tsx
 'use client'
 import { useState } from 'react';
 import IngredientsList from '../../components/IngredientsList';
 import DietaryPreferences from '../../components/DietaryPreferences';
+import AISubmit from '@/components/AISubmit';
 
 
 const Home = () => {
@@ -14,6 +14,8 @@ const Home = () => {
   const [allergies, setAllergies] = useState<string>('');
   const [healthGoals, setHealthGoals] = useState<string>('');
   const [dislikedIngredients, setDislikedIngredients] = useState<string>('');
+
+  const [AIResponse, setAIResponse] = useState<string>('');
 
   const addIngredient = () => {
     setIngredients([...ingredients, { name: ingredientName, quantity: ingredientQuantity, unit: ingredientUnit }]);
@@ -47,6 +49,7 @@ const Home = () => {
         setDislikedIngredients={setDislikedIngredients}
         savePreferences={savePreferences}
       />
+      <AISubmit AIResponse={AIResponse}/>
     </div>
   );
 };
