@@ -10,11 +10,11 @@ const Home = () => {
   const [ingredientName, setIngredientName] = useState<string>('');
   const [ingredientQuantity, setIngredientQuantity] = useState<string>('');
   const [ingredientUnit, setIngredientUnit] = useState<string>('');
-  
+
   const [allergies, setAllergies] = useState<string>('');
   const [healthGoals, setHealthGoals] = useState<string>('');
   const [dislikedIngredients, setDislikedIngredients] = useState<string>('');
-  
+
   const addIngredient = () => {
     setIngredients([...ingredients, { name: ingredientName, quantity: ingredientQuantity, unit: ingredientUnit }]);
     setIngredientName('');
@@ -27,28 +27,23 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
-      <h1 className="text-4xl font-bold mb-6">AI Meal Planner</h1>
-
-      {/* Ingredient Form */}
-      <IngredientsList 
-        ingredientName={ingredientName} 
+    <div className="min-h-screen flex flex-col items-center justify-center">
+      <IngredientsList
+        ingredientName={ingredientName}
         setIngredientName={setIngredientName}
-        ingredientQuantity={ingredientQuantity} 
+        ingredientQuantity={ingredientQuantity}
         setIngredientQuantity={setIngredientQuantity}
-        ingredientUnit={ingredientUnit} 
+        ingredientUnit={ingredientUnit}
         setIngredientUnit={setIngredientUnit}
         ingredients={ingredients}
         addIngredient={addIngredient}
       />
-
-      {/* Dietary Preferences Form */}
-      <DietaryPreferences 
-        allergies={allergies} 
+      <DietaryPreferences
+        allergies={allergies}
         setAllergies={setAllergies}
-        healthGoals={healthGoals} 
+        healthGoals={healthGoals}
         setHealthGoals={setHealthGoals}
-        dislikedIngredients={dislikedIngredients} 
+        dislikedIngredients={dislikedIngredients}
         setDislikedIngredients={setDislikedIngredients}
         savePreferences={savePreferences}
       />

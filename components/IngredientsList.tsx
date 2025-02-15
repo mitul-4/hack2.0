@@ -48,7 +48,7 @@ const IngredientsList: React.FC<IngredientsListProps> = ({
         />
         <button
           onClick={addIngredient}
-          className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-700"
+          className="w-full bg-[#00a36c] text-white py-2 rounded-full hover:bg-[#007f4c]"
         >
           Add Ingredient
         </button>

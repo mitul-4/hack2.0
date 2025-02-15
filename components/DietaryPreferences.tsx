@@ -43,7 +43,7 @@ const DietaryPreferences: React.FC<DietaryPreferencesProps> = ({
         />
         <button
           onClick={savePreferences}
-          className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-700"
+          className="w-full bg-[#00a36c] text-white py-2 rounded-full hover:bg-[#007f4c]"
         >
           Save Preferences
         </button>
