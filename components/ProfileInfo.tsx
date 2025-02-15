@@ -10,12 +10,12 @@ const Profile = () => {
   const user = {
     name: "John Doe",
     username: "johndoe",
-    avatar: "https://wallpapers.com/images/featured/funny-facebook-profile-pictures-nghrweqjmsbdt69s.jpg", // Replace with actual user image
+    avatar: "https://wallpapers.com/images/featured/funny-facebook-profile-pictures-nghrweqjmsbdt69s.jpg", // ✅ Use an external image
     followers: 1200,
     following: 500,
     posts: [
-      { id: 1, imageUrl: "https://i.pinimg.com/originals/a8/04/93/a804932d08e03b9e84d1e163167d5e65.jpg", title: "Avocado Toast" },
-      { id: 2, imageUrl: "https://woonheng.com/wp-content/uploads/2021/03/Tofu-Katsu-Japanese-Curry-1638x2048.jpg", title: "Pasta Carbonara" },
+      { id: 1, imageUrl: "/recipe1.jpg", title: "Avocado Toast" },
+      { id: 2, imageUrl: "/recipe2.jpg", title: "Pasta Carbonara" },
       { id: 3, imageUrl: "/recipe3.jpg", title: "Berry Smoothie" },
     ],
     saved: [

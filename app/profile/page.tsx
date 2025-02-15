@@ -1,6 +1,7 @@
-'use client';
+"use client";
 import { useState } from "react";
-import { UserCircle, Bookmark, Bell, Shield, List, Utensils, Settings } from "lucide-react";
+import Image from "next/image"; // ✅ Import Next.js Image
+import { UserCircle, Bookmark, Bell, Shield, List, Utensils } from "lucide-react";
 import ProfileInfo from "../../components/ProfileInfo";
 import DietaryPreferences from "../../components/ProfilePreferences";
 import CookingHistory from "../../components/FavouritedRecipes";
@@ -11,18 +12,10 @@ import ShoppingListReminders from "../../components/ShoppingReminders";
 const Profile = () => {
   const [activeTab, setActiveTab] = useState("profile");
 
-  // Dummy Data (Replace with user data)
-  const user = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    avatar: "/profile-pic.jpg", // Replace with actual user image
-  };
-
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
       <nav className="w-64 bg-white shadow-lg p-6 space-y-4">
-        <h2 className="text-2xl font-bold mb-4">Profile</h2>
         <button className={`flex items-center gap-2 p-2 rounded-lg w-full ${activeTab === "profile" ? "bg-blue-500 text-white" : "text-gray-700"}`} onClick={() => setActiveTab("profile")}>
           <UserCircle size={20} /> Profile  
         </button>
@@ -45,7 +38,6 @@ const Profile = () => {
 
       {/* Main Content */}
       <div className="flex-1 p-8">
-        {activeTab === "profile" && <ProfileInfo user={user} />}
         {activeTab === "diet" && <DietaryPreferences />}
         {activeTab === "history" && <CookingHistory />}
         {activeTab === "privacy" && <PrivacySettings />}
@@ -57,5 +49,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
-  
