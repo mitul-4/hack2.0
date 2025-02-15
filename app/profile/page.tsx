@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 'use client'
 
 import { useSession } from 'next-auth/react'
@@ -130,13 +129,3 @@ export default function Profile() {
     </div>
   )
 } 
-=======
-export default function Page() {
-    return (
-      <div>
-        <h1>Welcome to My New App</h1>
-      </div>
-    );
-  }
-  
->>>>>>> ce22aa86768fd3d84c0a9d3d989b6e26419b6c63
