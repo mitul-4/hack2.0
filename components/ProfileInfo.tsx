@@ -14,14 +14,14 @@ const Profile = () => {
     followers: 1200,
     following: 500,
     posts: [
-      { id: 1, imageUrl: "/recipe1.jpg", title: "Avocado Toast" },
-      { id: 2, imageUrl: "/recipe2.jpg", title: "Pasta Carbonara" },
-      { id: 3, imageUrl: "/recipe3.jpg", title: "Berry Smoothie" },
+      { id: 1, imageUrl: "https://tse1.mm.bing.net/th?id=OIP.sD9m1YZIkH13OklnDUl1JAHaHa&pid=Api&P=0&h=180", title: "Avocado Toast" },
+      { id: 2, imageUrl: "https://www.sipandfeast.com/wp-content/uploads/2019/02/spaghetti-carbonara-recipe-6.jpg", title: "Pasta Carbonara" },
+      { id: 3, imageUrl: "https://cookingformysoul.com/wp-content/uploads/2022/05/mixed-berry-smoothie-3-min.jpg", title: "Berry Smoothie" },
     ],
     saved: [
-      { id: 4, imageUrl: "/recipe4.jpg", title: "Vegan Tacos" },
-      { id: 5, imageUrl: "/recipe5.jpg", title: "Miso Soup" },
-      { id: 6, imageUrl: "/recipe6.jpg", title: "Chocolate Cake" },
+      { id: 4, imageUrl: "https://tse1.mm.bing.net/th?id=OIP.GXil4vpg7Pt2de32O7OseAHaHa&pid=Api&P=0&h=180", title: "Miso Soup" },
+      { id: 5, imageUrl: "https://tse1.mm.bing.net/th?id=OIP.pelK9k5ccm6GNDcM6fEozQHaE8&pid=Api&P=0&h=180", title: "Tacos" },
+      { id: 6, imageUrl: "https://sugargeekshow.com/wp-content/uploads/2020/01/chocolate-bundt-cake-featured.jpg", title: "Chocolate Cake" },
     ],
   };
 
@@ -77,16 +77,16 @@ const Profile = () => {
       </div>
 
       {/* Posts or Saved Recipes */}
-      <div className="grid grid-cols-3 gap-4 mt-6">
+      <div className="grid grid-cols-3 gap-6 mt-6">
         {activeTab === "posts"
           ? user.posts.map((post) => (
               <div key={post.id} className="relative">
                 <Image
                   src={post.imageUrl}
                   alt={post.title}
-                  width={150}
-                  height={150}
-                  className="w-full h-40 object-cover rounded-lg"
+                  width={300} // Increased width
+                  height={300} // Increased height
+                  className="w-full h-72 object-cover rounded-lg" // Adjusted height for cards
                 />
               </div>
             ))
@@ -95,9 +95,9 @@ const Profile = () => {
                 <Image
                   src={saved.imageUrl}
                   alt={saved.title}
-                  width={150}
-                  height={150}
-                  className="w-full h-40 object-cover rounded-lg"
+                  width={300} // Increased width
+                  height={300} // Increased height
+                  className="w-full h-72 object-cover rounded-lg" // Adjusted height for cards
                 />
               </div>
             ))}
