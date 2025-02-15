@@ -22,7 +22,7 @@ const IngredientsList: React.FC<IngredientsListProps> = ({
   addIngredient,
 }) => {
   return (
-    <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 mb-6 mt-6">
+    <div className="w-full bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 mb-6 mt-6">
       <h2 className="text-2xl font-semibold mb-4">Step 1: Add Ingredients</h2>
       <div className="mb-4">
         <input
@@ -54,7 +54,7 @@ const IngredientsList: React.FC<IngredientsListProps> = ({
         </button>
       </div>
       <div>
-        <h3 className="font-semibold mb-2">Ingredients List:</h3>
+        <h3 className="font-semibold mt-8 mb-2">Ingredients List:</h3>
         <ul className="list-disc pl-5">
           {ingredients.map((ingredient, index) => (
             <li key={index}>

@@ -69,7 +69,7 @@ const AISubmit: React.FC<AISubmitProps> = ({ ingredients, preferences, onRespons
   };
 
   return (
-    <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 mb-6">
+    <div className="w-full bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 mb-6">
       <h2 className="text-2xl font-semibold mb-4">Generate Meal Plan!</h2>
       <button
         onClick={callAI}

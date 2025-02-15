@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
-import { Provider } from "@/components/ui/provider"
 
 const poppins = Poppins({
   weight: ['400'],
@@ -23,7 +22,7 @@ export default function RootLayout({
     <html suppressHydrationWarning lang="en">
       <body className={`${poppins.className} antialiased bg-white text-black`} >
         <Navbar />
-        <Provider>{children}</Provider>
+        {children}
       </body>
     </html>
   );

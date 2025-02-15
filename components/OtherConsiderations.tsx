@@ -14,7 +14,7 @@ const OtherConsiderations: React.FC<OtherConsiderationsProps> = ({
   saveConsiderations,
 }) => {
   return (
-    <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 mb-6">
+    <div className="w-full bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 mb-6">
       <h2 className="text-2xl font-semibold mb-4">Step 3: Other Consideration</h2>
       <div className="mb-4">
         <textarea
