@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-<<<<<<< HEAD
 import Navbar from "@/components/navbar";
 import { Provider } from "@/components/ui/provider"
-=======
-import Navbar from "@/components/navbar"
-import ClientProvider from "@/components/ClientProvider";
->>>>>>> 044e73adc2bc798205b382ce70e1905a129f1154
 
 const poppins = Poppins({
   weight: ['400'],
@@ -25,19 +20,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-<<<<<<< HEAD
     <html suppressHydrationWarning lang="en">
       <body className={`${poppins.className} antialiased bg-white text-black`} >
         <Navbar />
         <Provider>{children}</Provider>
-=======
-    <html lang="en">
-      <body className={`${poppins.className} antialiased bg-white text-black`}>
-        <ClientProvider>
-          <Navbar />
-          {children}
-        </ClientProvider>
->>>>>>> 044e73adc2bc798205b382ce70e1905a129f1154
       </body>
     </html>
   );
