@@ -5,6 +5,7 @@ import DietaryPreferences from '../../components/DietaryPreferences';
 import AISubmit from '@/components/AISubmit';
 import OtherConsiderations from '@/components/OtherConsiderations';
 import RecipeToFeed from '@/components/RecipeToFeed';
+import Scanner from '@/components/Scanner';
 
 interface Recipe {
   name: string;
@@ -130,8 +131,26 @@ const Home = () => {
     console.log('Received recipes:', recipes);
   };
 
+  const handleScannedIngredients = (scannedIngredients: { name: string; quantity: string; unit: string }[]) => {
+    // Add scanned ingredients to the list
+    setIngredients(prevIngredients => [
+      ...prevIngredients,
+      ...scannedIngredients.map(ing => ({
+        name: ing.name,
+        quantity: ing.quantity,
+        unit: ing.unit
+      }))
+    ]);
+  };
+
+  const removeIngredient = (index: number) => {
+    setIngredients(ingredients.filter((_, i) => i !== index));
+  };
+
   return (
     <div className="min-h-screen max-w-xl flex flex-col items-center justify-center mx-auto py-8">
+      <Scanner onIngredientsFound={handleScannedIngredients} />
+      
       <IngredientsList
         ingredientName={ingredientName}
         setIngredientName={setIngredientName}
@@ -141,6 +160,7 @@ const Home = () => {
         setIngredientUnit={setIngredientUnit}
         ingredients={ingredients}
         addIngredient={addIngredient}
+        removeIngredient={removeIngredient}
       />
 
       <DietaryPreferences

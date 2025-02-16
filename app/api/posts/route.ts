@@ -1,49 +1,29 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import clientPromise from '@/lib/mongodb';
+// pages/api/posts.ts
+import { NextApiRequest, NextApiResponse } from "next";
+import { MongoClient } from "mongodb";
 
-export async function POST(req: NextRequest) {
+const MONGODB_URI = process.env.MONGODB_URI || "your-mongodb-uri";
+const DATABASE_NAME = "test";
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   try {
-    const session = await getServerSession();
-    
-    if (!session?.user?.email) {
-      return NextResponse.json(
-        { error: 'Not authenticated' },
-        { status: 401 }
-      );
+    const client = await MongoClient.connect(MONGODB_URI);
+    const db = client.db(DATABASE_NAME);
+    const postsCollection = db.collection("posts");
+
+    if (req.method === "GET") {
+      const posts = await postsCollection.find().toArray();
+      res.status(200).json(posts);
+    } else {
+      res.setHeader("Allow", ["GET"]);
+      res.status(405).end(`Method ${req.method} Not Allowed`);
     }
 
-    const { recipe, image } = await req.json();
-
-    if (!recipe) {
-      return NextResponse.json(
-        { error: 'Recipe is required' },
-        { status: 400 }
-      );
-    }
-
-    const client = await clientPromise;
-    const db = client.db();
-
-    const result = await db.collection('posts').insertOne({
-      recipe,
-      image,
-      author: session.user.email,
-      likes: 0,
-      comments: [],
-      createdAt: new Date()
-    });
-
-    return NextResponse.json({
-      success: true,
-      postId: result.insertedId
-    });
-
+    client.close();
   } catch (error) {
-    console.error('Error creating post:', error);
-    return NextResponse.json(
-      { error: 'Failed to create post' },
-      { status: 500 }
-    );
+    res.status(500).json({ error: "Failed to fetch posts" });
   }
-} 
+}

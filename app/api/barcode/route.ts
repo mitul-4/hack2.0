@@ -11,6 +11,14 @@ interface ProductInfo {
   };
 }
 
+const OPEN_FOOD_FACTS_API = 'https://world.openfoodfacts.org/api/v0';
+
+interface OpenFoodFactsProduct {
+  product_name: string;
+  quantity: string;
+  serving_size?: string;
+}
+
 export async function GET(req: NextRequest) {
   try {
     const searchParams = req.nextUrl.searchParams;
@@ -25,7 +33,7 @@ export async function GET(req: NextRequest) {
 
     // Call Open Food Facts API
     const response = await axios.get(
-      `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`
+      `${OPEN_FOOD_FACTS_API}/product/${barcode}.json`
     );
 
     if (!response.data.status) {
@@ -81,79 +89,61 @@ export async function GET(req: NextRequest) {
 // POST endpoint for batch processing multiple barcodes
 export async function POST(req: NextRequest) {
   try {
-    const { barcodes } = await req.json() as { barcodes: string[] };
+    const { barcode } = await req.json();
 
-    if (!barcodes || !Array.isArray(barcodes)) {
+    if (!barcode) {
       return NextResponse.json(
-        { error: 'Invalid barcodes data' },
+        { error: 'Barcode is required' },
         { status: 400 }
       );
     }
 
-    // Process multiple barcodes in parallel
-    const results = await Promise.all(
-      barcodes.map(async (barcode) => {
-        try {
-          const response = await axios.get(
-            `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`
-          );
+    // Call Open Food Facts API
+    const response = await fetch(`${OPEN_FOOD_FACTS_API}/product/${barcode}.json`);
+    
+    if (!response.ok) {
+      throw new Error('Product not found');
+    }
 
-          if (!response.data.status) {
-            return {
-              barcode,
-              error: 'Product not found'
-            };
-          }
+    const data = await response.json();
+    
+    if (!data.product) {
+      throw new Error('Product not found');
+    }
 
-          const productData = response.data.product;
-          const productInfo: ProductInfo = {
-            product_name: productData.product_name || 'Unknown Product',
-            quantity: productData.quantity || 'Not specified',
-            serving_size: productData.serving_size || 'Not specified',
-            ingredients_text: productData.ingredients_text || 'Not available',
-            nutriments: productData.nutriments || {}
-          };
+    const product = data.product as OpenFoodFactsProduct;
 
-          // Parse quantity
-          let amount = null;
-          let unit = null;
-          
-          if (productInfo.quantity) {
-            const match = productInfo.quantity.match(/(\d+(?:\.\d+)?)\s*([a-zA-Z]+)/);
-            if (match) {
-              amount = parseFloat(match[1]);
-              unit = match[2].toLowerCase();
-            }
-          }
+    // Extract quantity from the product data
+    let quantity = '1';
+    let unit = 'piece';
 
-          return {
-            barcode,
-            data: {
-              ...productInfo,
-              parsed_quantity: {
-                amount,
-                unit
-              }
-            }
-          };
-        } catch (error) {
-          return {
-            barcode,
-            error: 'Failed to fetch product information'
-          };
-        }
-      })
-    );
+    if (product.quantity) {
+      const match = product.quantity.match(/(\d+(\.\d+)?)\s*([a-zA-Z]+)/);
+      if (match) {
+        quantity = match[1];
+        unit = match[3].toLowerCase();
+      }
+    } else if (product.serving_size) {
+      const match = product.serving_size.match(/(\d+(\.\d+)?)\s*([a-zA-Z]+)/);
+      if (match) {
+        quantity = match[1];
+        unit = match[3].toLowerCase();
+      }
+    }
 
     return NextResponse.json({
       success: true,
-      results
+      ingredients: [{
+        name: product.product_name,
+        quantity,
+        unit
+      }]
     });
 
   } catch (error) {
-    console.error('Error processing barcodes:', error);
+    console.error('Error processing barcode:', error);
     return NextResponse.json(
-      { error: 'Failed to process barcodes' },
+      { error: 'Failed to lookup product' },
       { status: 500 }
     );
   }
