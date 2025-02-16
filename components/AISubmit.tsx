@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import RecipeToFeed from './RecipeToFeed';
-const [generatedRecipes, setGeneratedRecipes] = useState<Recipe[]>([]);
+
 interface Ingredient {
   name: string;
   volume: string;
@@ -41,15 +41,33 @@ const AISubmit: React.FC<AISubmitProps> = ({ ingredients, preferences, onRespons
       setLoading(true);
       setError(null);
 
+      if (!ingredients || ingredients.length === 0) {
+        throw new Error('Please add some ingredients first');
+      }
+
+      // Format ingredients into a string
+      const ingredientsList = ingredients
+        .map(ing => `${ing.name} (${ing.volume})`)
+        .join('\n');
+
+      // Create the prompt string
+      const prompt = `Ingredients:\n${ingredientsList}\nAllergies: ${preferences.allergies}\nHealth Goals: ${preferences.healthGoals}\nDislikes: ${preferences.dislikes}\nEffort Level: ${preferences.effort}\nMood: ${preferences.mood}`;
+
+      const requestBody = { prompt };
+      console.log('Sending request with body:', requestBody);
+      console.log('Stringified body:', JSON.stringify(requestBody));
+
+      if (!prompt.trim()) {
+        throw new Error('Empty prompt generated');
+      }
+
       const response = await fetch('/api/meal-planning', {
         method: 'POST',
         headers: {
+          'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          ingredients,
-          ...preferences
-        })
+        body: JSON.stringify(requestBody)
       });
 
       const data = await response.json();

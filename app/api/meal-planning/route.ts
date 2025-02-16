@@ -19,14 +19,19 @@ interface Recipe {
 
 export async function POST(req: NextRequest) {
   try {
-    // Log request start
-    console.log('Received meal planning request');
-
-    // Parse request body
-    const body = await req.json();
-    console.log('Request body:', JSON.stringify(body, null, 2));
+    console.log('Raw request:', req);
+    console.log('Request headers:', Object.fromEntries(req.headers));
+    
+    // Try to read the raw text first
+    const rawText = await req.text();
+    console.log('Raw request body:', rawText);
+    
+    // Then parse as JSON if there's content
+    const body = rawText ? JSON.parse(rawText) : {};
+    console.log('Parsed body:', body);
 
     if (!body.prompt || typeof body.prompt !== 'string') {
+      console.log('Invalid or missing prompt:', body);
       return NextResponse.json(
         { error: 'Invalid request format. Prompt is required.' },
         { status: 400 }
@@ -47,7 +52,7 @@ Please suggest 3 different recipes that:
 
 For each recipe, provide:
 - Recipe name
-- List of ingredients (marking which ones are additional/not in the original list)
+- List of ingredients (marking which ones are additional/not in the original list)(Specify the amounts of ingredient)
 - Detailed step-by-step instructions
 - Preparation time and difficulty level
 - Health benefits related to the stated goals
