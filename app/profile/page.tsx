@@ -5,6 +5,8 @@ import ProfileInfo from "../../components/ProfileInfo";
 import DietaryPreferences from "../../components/ProfilePreferences";
 import CookingHistory from "../../components/FavouritedRecipes";
 import ShoppingListReminders from "../../components/ShoppingReminders";
+import Settings from "../../components/Settings";
+
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState("Profile");
@@ -13,7 +15,7 @@ const Profile = () => {
     { name: "Profile", Icon: UserCircle, component: <ProfileInfo /> },
     { name: "Dietary Preferences", Icon: Utensils, component: <DietaryPreferences /> },
     { name: "Shopping List", Icon: List, component: <ShoppingListReminders /> },
-    { name: "Settings", Icon: Cog, component: <div/>}
+    { name: "Settings", Icon: Cog, component: <Settings/>}
   ];
 
   return (
