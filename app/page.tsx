@@ -153,6 +153,7 @@ const FeedPage = () => {
               <button
                 onClick={() => handleSendComment(post.id)}
                 className="text-gray-500 hover:text-gray-700 transition duration-200"
+                title="Send Comment"
               >
                 <FaPaperPlane size={18} />
               </button>

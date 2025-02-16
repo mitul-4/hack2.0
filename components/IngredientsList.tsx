@@ -9,6 +9,7 @@ type IngredientsListProps = {
   setIngredientUnit: React.Dispatch<React.SetStateAction<string>>;
   ingredients: { name: string, quantity: string, unit: string }[];
   addIngredient: () => void;
+  removeIngredient: (index: number) => void;
 };
 
 const IngredientsList: React.FC<IngredientsListProps> = ({
@@ -20,6 +21,7 @@ const IngredientsList: React.FC<IngredientsListProps> = ({
   setIngredientUnit,
   ingredients,
   addIngredient,
+  removeIngredient
 }) => {
   return (
     <div className="w-full bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 mb-6 mt-6">

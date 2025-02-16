@@ -180,7 +180,6 @@ const Home = () => {
         setSentiment={setSentiment}
         saveConsiderations={() => {}}
       />
-<<<<<<< HEAD
 
       <AISubmit 
         ingredients={formatIngredientsForAI()}
@@ -202,12 +201,6 @@ const Home = () => {
           ))}
         </div>
       )}
-=======
-      
-      <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 w-full h-48 mt-4">
-        <AISubmit />
-      </div>
->>>>>>> 1dfe713aaccdfbc4394a00e1e0caec7b54b6d15c
     </div>
   );
 };
