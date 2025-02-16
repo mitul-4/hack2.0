@@ -66,6 +66,7 @@ const Home = () => {
         setSentiment={setSentiment}
         saveConsiderations={saveConsiderations}
       />
+      
       <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 w-full h-48 mt-4">
         <AISubmit />
       </div>

@@ -43,7 +43,7 @@ const IngredientsList: React.FC<IngredientsListProps> = ({
           type="text"
           value={ingredientUnit}
           onChange={(e) => setIngredientUnit(e.target.value)}
-          placeholder="Unit (e.g., grams)"
+          placeholder="Unit (e.g. grams)"
           className="w-full p-2 border rounded-md mb-4"
         />
         <button
