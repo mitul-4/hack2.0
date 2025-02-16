@@ -15,11 +15,15 @@ const ShoppingListReminders = () => {
 
   // Function to handle the checkbox status for an ingredient
   const toggleIngredient = (index: number) => {
-    setIngredients((prev) => {
-      const newIngredients = [...prev];
-      newIngredients[index] = newIngredients[index] + " (Bought)"; // Add '(Bought)' to indicate it's purchased
-      return newIngredients;
-    });
+    setIngredients((prev) =>
+      prev.map((item, i) =>
+        i === index
+          ? item.includes("(Bought)")
+            ? item.replace(" (Bought)", "") // Remove "(Bought)" if already present
+            : item + " (Bought)" // Add "(Bought)" if not present
+          : item
+      )
+    );
   };
 
   return (
@@ -52,6 +56,7 @@ const ShoppingListReminders = () => {
             <li key={index} className="flex items-center">
               <input
                 type="checkbox"
+                checked={ingredient.includes("(Bought)")}
                 onChange={() => toggleIngredient(index)}
                 className="mr-2"
               />
