@@ -25,34 +25,30 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="w-full bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 mb-6">
-      <h2 className="text-2xl font-semibold mb-4">Profile: Dietary Preferences</h2>
-      <div className="mb-4">
-        <textarea
-          value={allergies}
-          onChange={(e) => setAllergies(e.target.value)}
-          placeholder="Allergies (e.g., nuts, dairy)"
-          className="w-full p-2 border rounded-md mb-2"
-        />
-    
-        <textarea
-          value={FavIngredients}
-          onChange={(e) => setFavIngredients(e.target.value)}
-          placeholder="Favourite Ingredients"
-          className="w-full p-2 border rounded-md mb-2"
-        />
-        <textarea
-          value={DisIngredients}
-          onChange={(e) => setDisIngredients(e.target.value)}
-          placeholder="Disliked Ingredients"
-          className="w-full p-2 border rounded-md mb-2"
-        />
+    <div className="bg-white p-6 rounded-lg shadow-lg max-w-3xl mx-auto">
+      <h2 className="text-2xl font-semibold mb-6 text-center">Dietary Preferences</h2>
+      
+      <div className="space-y-4">
+        <div className="flex justify-between">
+          <p className="font-medium text-gray-700">Allergies:</p>
+          <p className="text-gray-500">None</p>
+        </div>
 
-        <button
-          onClick={savePreferences}
-          className="w-full bg-[#00a36c] text-white py-2 rounded-full hover:bg-[#007f4c]"
-        >
-          Save Preferences
+        <div className="flex justify-between">
+          <p className="font-medium text-gray-700">Liked Ingredients:</p>
+          <p className="text-gray-500">Chicken</p>
+        </div>
+
+        <div className="flex justify-between">
+          <p className="font-medium text-gray-700">Disliked Ingredients:</p>
+          <p className="text-gray-500">Mushrooms, Onions</p>
+        </div>
+      </div>
+
+      {/* Update Preferences Button */}
+      <div className="mt-6 text-center">
+      <button className="px-6 py-2 bg-[#00a36c] text-white rounded-lg font-semibold hover:bg-[#007f4c] transition duration-200">
+        Update Preferences
         </button>
       </div>
     </div>
