@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { UserCircle, Bookmark, List, Utensils } from "lucide-react";
+import { UserCircle, Bookmark, List, Utensils, Cog } from "lucide-react";
 import ProfileInfo from "../../components/ProfileInfo";
 import DietaryPreferences from "../../components/ProfilePreferences";
 import CookingHistory from "../../components/FavouritedRecipes";
@@ -12,8 +12,8 @@ const Profile = () => {
   const tabs = [
     { name: "Profile", Icon: UserCircle, component: <ProfileInfo /> },
     { name: "Dietary Preferences", Icon: Utensils, component: <DietaryPreferences /> },
-    { name: "History", Icon: Bookmark, component: <CookingHistory /> },
     { name: "Shopping List", Icon: List, component: <ShoppingListReminders /> },
+    { name: "Settings", Icon: Cog, component: <div/>}
   ];
 
   return (
