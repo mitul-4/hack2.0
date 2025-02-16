@@ -1,4 +1,29 @@
-const DietaryPreferences = () => {
+import React, { useState, useEffect } from 'react';
+
+const ProfilePage = () => {
+  const [allergies, setAllergies] = useState<string>('');
+  const [FavIngredients, setFavIngredients] = useState<string>('');
+  const [DisIngredients, setDisIngredients] = useState<string>('');
+  
+
+  // Load stored preferences from localStorage
+  useEffect(() => {
+    const storedAllergies = localStorage.getItem('allergies');
+    const storedFavIngredients = localStorage.getItem('FavIngredients');
+    const storedDisIngredients = localStorage.getItem('DisIngredients');
+
+
+    if (storedAllergies) setAllergies(storedAllergies);
+    if (storedFavIngredients) setFavIngredients(storedFavIngredients);
+    if (storedDisIngredients) setDisIngredients(storedDisIngredients);
+  }, []);
+
+  const savePreferences = () => {
+    localStorage.setItem('allergies', allergies);
+    localStorage.setItem('FavIngredients', FavIngredients);
+    alert('Preferences saved!');
+  };
+
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg max-w-3xl mx-auto">
       <h2 className="text-2xl font-semibold mb-6 text-center">Dietary Preferences</h2>
@@ -22,12 +47,12 @@ const DietaryPreferences = () => {
 
       {/* Update Preferences Button */}
       <div className="mt-6 text-center">
-        <button className="px-6 py-2 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition duration-200">
-          Update Preferences
+      <button className="px-6 py-2 bg-[#00a36c] text-white rounded-lg font-semibold hover:bg-[#007f4c] transition duration-200">
+        Update Preferences
         </button>
       </div>
     </div>
   );
 };
 
-export default DietaryPreferences;
+export default ProfilePage;

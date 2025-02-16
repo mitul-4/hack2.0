@@ -4,6 +4,7 @@ import IngredientsList from '../../components/IngredientsList';
 import DietaryPreferences from '../../components/DietaryPreferences';
 import AISubmit from '@/components/AISubmit';
 import OtherConsiderations from '@/components/OtherConsiderations';
+import RecipeToFeed from '@/components/RecipeToFeed';
 
 interface Recipe {
   name: string;
@@ -76,6 +77,15 @@ const RecipeDisplay = ({ recipe }: { recipe: Recipe }) => {
             <p className="text-yellow-700">{recipe.allergyNotes}</p>
           </div>
         )}
+      </div>
+
+      <div className="mt-6 border-t pt-6">
+        <RecipeToFeed 
+          recipe={recipe}
+          onSuccess={() => {
+            alert('Recipe successfully shared to feed!');
+          }}
+        />
       </div>
     </div>
   );

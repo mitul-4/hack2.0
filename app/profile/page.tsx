@@ -11,7 +11,7 @@ const Profile = () => {
 
   const tabs = [
     { name: "Profile", Icon: UserCircle, component: <ProfileInfo /> },
-    { name: "Diet", Icon: Utensils, component: <DietaryPreferences /> },
+    { name: "Dietary Preferences", Icon: Utensils, component: <DietaryPreferences /> },
     { name: "History", Icon: Bookmark, component: <CookingHistory /> },
     { name: "Shopping List", Icon: List, component: <ShoppingListReminders /> },
   ];
